@@ -1,0 +1,26 @@
+<app-header [title]="'Users List'"></app-header>
+
+<div class="container" id="usersList">
+  <div class="loader" *ngIf="pending"></div>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>Full Name</th>
+            <th>Telephone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.userid}}</td>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.tel}}</td>
+            <td><a [routerLink]="['/user', user.userid]"><span class="glyphicon glyphicon-edit"></span></a></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>

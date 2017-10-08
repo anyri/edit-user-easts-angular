@@ -1,0 +1,69 @@
+[
+    {
+        "userid": "hills",
+        "firstName": "Sam",
+        "lastName": "Hill",
+        "email": "easts@correnet.com",
+        "tel": "3252005",
+        "devices": [
+            {
+                "mac": "5067AEE0BADB",
+                "deviceType": "Cisco 8841",
+                "lines": [
+                    {
+                        "index": 1,
+                        "directoryNumber": "1529"
+                    }
+                ]
+            },
+            {
+                "mac": "12AB34CD56EF",
+                "deviceType": "Cisco 6941",
+                "lines": [
+                    {
+                        "index": 1,
+                        "directoryNumber": "1530"
+                    },
+                    {
+                        "index": 2,
+                        "directoryNumber": "1531"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "userid": "ravanelc",
+        "firstName": "Cecile",
+        "lastName": "Ravanel",
+        "email": "ravanelc@correnet.com",
+        "tel": "3272007",
+        "devices": [
+            {
+                "mac": "5067AF20BADB",
+                "deviceType": "Cisco 7975",
+                "lines": [
+                    {
+                        "index": 1,
+                        "directoryNumber": "1540"
+                    },
+                    {
+                        "index": 2,
+                        "directoryNumber": "1541"
+                    }
+                ]
+            },
+            {
+                "mac": "CDAB34CD41EF",
+                "deviceType": "Cisco 6901",
+                "lines": [
+                    {
+                        "index": 1,
+                        "directoryNumber": "1542"
+                    }
+                ]
+            }
+        ]
+    }
+]
+

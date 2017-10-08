@@ -1,0 +1,200 @@
+<app-header [title]="'Edit User'"></app-header>
+
+<form #editUserForm="ngForm" (ngSubmit)="editUser()">
+  <div id="editUser">
+  <div class="loader" *ngIf="pending"></div>
+    
+      <tabset>
+        <!-- ///// User Details -->
+        <tab heading="Details">
+          <div class="container user-details">
+            <div class="row">
+                <div class="col-xs-12 col-md-3"></div>
+              <div class="col-xs-12 col-md-6">
+
+                <div class="form-group">
+                  <label for="userid">User Id *</label>
+                  <input type="text" class="form-control" id="userid" placeholder="{{user.userid}}" [(ngModel)]="user.userid" name="userid"
+                    readonly>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-xs-12 col-md-6">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="{{user.firstName}}" [(ngModel)]="user.firstName" required
+                      #f_firstName="ngModel" name="firstName" minlength="3">
+                    <div *ngIf="f_firstName.errors && (f_firstName.dirty || f_firstName.touched)" class="alert alert-danger">
+                      <div [hidden]="!f_firstName.errors.required">
+                        Required field
+                      </div>
+                      <div [hidden]="!f_firstName.errors.minlength">
+                        Minimum 4 symbols
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-md-6">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="{{user.lastName}}" [(ngModel)]="user.lastName" required
+                      #f_lastName="ngModel" name="lastName" minlength="4">
+                    <div *ngIf="f_lastName.errors && (f_lastName.dirty || f_lastName.touched)" class="alert alert-danger">
+                      <div [hidden]="!f_lastName.errors.required">
+                        Required field
+                      </div>
+                      <div [hidden]="!f_lastName.errors.minlength">
+                        Minimum 4 symbols
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" class="form-control" id="email" placeholder="{{user.email}}" [(ngModel)]="user.email" required #f_email="ngModel"
+                    name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" autofocus>
+                  <div *ngIf="f_email.errors && (f_email.dirty || f_email.touched)" class="alert alert-danger">
+                    <div [hidden]="!f_email.errors.required">
+                      Required field
+                    </div>
+                    <div [hidden]="!f_email.errors.pattern">
+                      Please input a valid email.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tel">Telephone:</label>
+                  <input type="text" class="form-control" id="tel" placeholder="{{user.tel}}" [(ngModel)]="user.tel" required #f_tel="ngModel"
+                    name="tel" pattern="[0-9]{7}">
+                  <div *ngIf="f_tel.errors && (f_tel.dirty || f_tel.touched)" class="alert alert-danger">
+                    <div [hidden]="!f_tel.errors.required">
+                      Required field
+                    </div>
+                    <div [hidden]="!f_tel.errors.pattern">
+                      Please input a valid phone number.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </tab>
+        <!-- ///// End User Details -->
+
+        <!-- ///// User Devices -->
+        <tab heading="Devices ({{user.devices.length}})">
+          <div class="container user-details">
+            <div class="row">
+                <div class="col-xs-12 col-md-2"></div>
+                <div class="col-xs-12 col-md-8">
+
+                  <div class="col-xs-12 col-md-1">
+                    Phones
+                  </div>
+                  <div class="col-xs-12 col-md-11">
+                    <accordion>
+                      <!-- Devices -->
+                      <accordion-group *ngFor="let device of user.devices" [heading]="device.mac">
+
+                        <div class="form-group row">
+                          <label for="mac" class="col-xs-12 col-md-2">MAC:</label>
+                          <div class="col-xs-12 col-md-10">
+                            <input type="text" class="form-control" id="mac" placeholder="{{device.mac}}" [(ngModel)]="device.mac" required #f_mac="ngModel"
+                              name="mac" pattern="[a-zA-Z0-9]{12}">
+                            <div *ngIf="f_mac.errors && (f_mac.dirty || f_mac.touched)" class="alert alert-danger">
+                              <div [hidden]="!f_mac.errors.required">
+                                Required field
+                              </div>
+                              <div [hidden]="!f_mac.errors.pattern">
+                                Please input a valid mac number.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="mac" class="col-xs-12 col-md-2">Device Type:</label>
+                          <div class="col-xs-12 col-md-10">
+                            <input type="text" class="form-control" id="tel" placeholder="{{device.deviceType}}" [(ngModel)]="device.deviceType" required
+                              #f_deviceType="ngModel" name="deviceType">
+                            <div *ngIf="f_deviceType.errors && (f_deviceType.dirty || f_deviceType.touched)" class="alert alert-danger">
+                              <div [hidden]="!f_deviceType.errors.required">
+                                Required field
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <label class="col-xs-12 col-md-2">Lines:</label>
+                          <!-- Lines -->
+                          <div class="col-xs-12 col-md-10">
+                            <accordion>
+                              <accordion-group *ngFor="let line of device.lines" [heading]="line.directoryNumber">
+                                <div class="form-group row">
+                                  <label for="lineIndex" class="col-xs-12 col-md-2">Index:</label>
+                                  <div class="col-xs-12 col-md-10">
+                                    <input type="number" class="form-control" id="lineIndex" placeholder="{{line.index}}" [(ngModel)]="line.index"
+                                      required #f_lineIndex="ngModel" name="lineIndex" pattern="[1-9]{1}[0-9]?">
+                                    <div *ngIf="f_lineIndex.errors && (f_lineIndex.dirty || f_lineIndex.touched)" class="alert alert-danger">
+                                      <div [hidden]="!f_lineIndex.errors.required">
+                                        Required field
+                                      </div>
+                                      <div [hidden]="!f_lineIndex.errors.pattern">
+                                        Please input a valid index.
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group row">
+                                  <label for="directoryNumber" class="col-xs-12 col-md-2">Directory Numer:</label>
+                                  <div class="col-xs-12 col-md-10">
+                                    <input type="text" class="form-control" id="directoryNumber" placeholder="{{line.directoryNumber}}" [(ngModel)]="line.directoryNumber"
+                                      required #f_directoryNumber="ngModel" name="directoryNumber" pattern="[0-9]{4}">
+                                    <div *ngIf="f_directoryNumber.errors && (f_directoryNumber.dirty || f_directoryNumber.touched)" class="alert alert-danger">
+                                      <div [hidden]="!f_directoryNumber.errors.required">
+                                        Required field
+                                      </div>
+                                      <div [hidden]="!f_directoryNumber.errors.pattern">
+                                        Please input a valid directory number.
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                              </accordion-group>
+                            </accordion>
+                          </div>
+                          <!-- End Lines -->
+                      </div>
+
+                      </accordion-group>
+                      <!-- End Devices -->
+                    </accordion>         
+                  </div>
+
+                </div>
+            </div>
+          </div>
+        </tab>
+        <!-- ///// End User Devices -->
+        
+
+      </tabset>
+
+  </div>
+
+  <div class="actions_line">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" [disabled]="!editUserForm.form.valid" class="inner-line-btn">Update User</button>
+            <a routerLink="/" class="inner-line-btn">Cancel</a>
+            <button type="button" class="inner-line-btn" (click)="reset()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</form>

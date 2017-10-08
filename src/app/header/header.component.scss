@@ -1,0 +1,15 @@
+@import "~variables.scss";
+
+header {
+    background: $main-color;
+    height: 120px;
+    text-align: center;
+    font-size: 35px;
+    color: #fff;
+    line-height: 170px;
+}
+
+#logo {
+    color: $logo-color;
+    text-decoration: none;
+}

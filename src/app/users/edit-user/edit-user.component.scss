@@ -1,0 +1,14 @@
+@import "~variables.scss";
+
+.actions_line {
+    background: $main-color;
+    position: absolute;
+    bottom: 45px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+
+    .container {
+        margin: 15px auto 0;
+    }
+}
