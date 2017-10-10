@@ -11,14 +11,40 @@ app.get('/api/users', (req, res) => {
 });
 
 app.put('/api/users', (req,res) => {
-  let userid = req.query.id;
+  let userid = req.query.id; 
+  let user;
+
   if(userid) {
-    let user = data.find(user => user.userid == userid);
+    user = data.find(user => user.userid == userid);
+
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
     user.email = req.body.email;
-    user.tel = req.body.tel;
-    user.devices = req.body.devices;
+    user.tel = req.body.tel;    
+    user.devices = [];
+    let updatedDev = req.body.devices;
+
+    if(updatedDev) {
+      
+      updatedDev.forEach(srcDev => {
+        let dev = {};
+        dev.mac = srcDev.mac;
+        dev.deviceType = srcDev.deviceType;
+        srcDevLines = srcDev.lines;
+        if(srcDevLines) {
+          let lines = [];
+          srcDevLines.forEach(srcLine => {
+            let line = {};
+            line.index = srcLine.index;
+            line.directoryNumber = srcLine.directoryNumber;
+            lines.push(line);
+          })
+          dev.lines = lines;
+        }        
+        user.devices.push(dev);
+      })
+    }    
+
     setTimeout(() => res.send({ status: 'ok', updateduser: user}), 700);
   } else {
     setTimeout(() => res.send({status: 'fail', message: 'Update Failed'}), 700);

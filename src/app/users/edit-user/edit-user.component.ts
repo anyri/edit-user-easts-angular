@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit {
         if(data.status == 'fail')
           this.router.navigate(['error/user_not_found']);
 
-        // console.log(`User ${JSON.stringify(data)}`);
+        console.log(`User ${JSON.stringify(data)}`);
         this.user = new User( data.user );
         this.pending = false;
         this.basicUser = Object.assign({}, this.user);
