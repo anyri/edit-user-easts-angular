@@ -99,10 +99,10 @@
                       <accordion-group *ngFor="let device of user.devices" [heading]="device.mac">
 
                         <div class="form-group row">
-                          <label for="mac" class="col-xs-12 col-md-2">MAC:</label>
+                          <label class="col-xs-12 col-md-2">MAC {{device.mac}}:</label>
                           <div class="col-xs-12 col-md-10">
-                            <input type="text" class="form-control" id="mac" placeholder="{{device.mac}}" [(ngModel)]="device.mac" required #f_mac="ngModel"
-                              name="mac" pattern="[a-zA-Z0-9]{12}">
+                            <input type="text" class="form-control" placeholder="{{device.mac}}" [(ngModel)]="device.mac" required #f_mac="ngModel"
+                              name="mac-{{device.mac}}" pattern="[a-zA-Z0-9]{12}">
                             <div *ngIf="f_mac.errors && (f_mac.dirty || f_mac.touched)" class="alert alert-danger">
                               <div [hidden]="!f_mac.errors.required">
                                 Required field
@@ -113,11 +113,12 @@
                             </div>
                           </div>
                         </div>
+
                         <div class="form-group row">
-                          <label for="mac" class="col-xs-12 col-md-2">Device Type:</label>
+                          <label class="col-xs-12 col-md-2">Device Type:</label>
                           <div class="col-xs-12 col-md-10">
-                            <input type="text" class="form-control" id="tel" placeholder="{{device.deviceType}}" [(ngModel)]="device.deviceType" required
-                              #f_deviceType="ngModel" name="deviceType">
+                            <input type="text" class="form-control" placeholder="{{device.deviceType}}" [(ngModel)]="device.deviceType" required
+                              #f_deviceType="ngModel" name="deviceType-{{device.deviceType}}">
                             <div *ngIf="f_deviceType.errors && (f_deviceType.dirty || f_deviceType.touched)" class="alert alert-danger">
                               <div [hidden]="!f_deviceType.errors.required">
                                 Required field
@@ -132,10 +133,10 @@
                             <accordion>
                               <accordion-group *ngFor="let line of device.lines" [heading]="line.directoryNumber">
                                 <div class="form-group row">
-                                  <label for="lineIndex" class="col-xs-12 col-md-2">Index:</label>
+                                  <label class="col-xs-12 col-md-2">Index:</label>
                                   <div class="col-xs-12 col-md-10">
-                                    <input type="number" class="form-control" id="lineIndex" placeholder="{{line.index}}" [(ngModel)]="line.index"
-                                      required #f_lineIndex="ngModel" name="lineIndex" pattern="[1-9]{1}[0-9]?">
+                                    <input type="number" class="form-control" placeholder="{{line.index}}" [(ngModel)]="line.index"
+                                      required #f_lineIndex="ngModel" name="lineIndex-{{line.index}}" pattern="[1-9]{1}[0-9]?">
                                     <div *ngIf="f_lineIndex.errors && (f_lineIndex.dirty || f_lineIndex.touched)" class="alert alert-danger">
                                       <div [hidden]="!f_lineIndex.errors.required">
                                         Required field
@@ -150,8 +151,8 @@
                                 <div class="form-group row">
                                   <label for="directoryNumber" class="col-xs-12 col-md-2">Directory Numer:</label>
                                   <div class="col-xs-12 col-md-10">
-                                    <input type="text" class="form-control" id="directoryNumber" placeholder="{{line.directoryNumber}}" [(ngModel)]="line.directoryNumber"
-                                      required #f_directoryNumber="ngModel" name="directoryNumber" pattern="[0-9]{4}">
+                                    <input type="text" class="form-control" placeholder="{{line.directoryNumber}}" [(ngModel)]="line.directoryNumber"
+                                      required #f_directoryNumber="ngModel" name="directoryNumber-{{line.directoryNumber}}" pattern="[0-9]{4}">
                                     <div *ngIf="f_directoryNumber.errors && (f_directoryNumber.dirty || f_directoryNumber.touched)" class="alert alert-danger">
                                       <div [hidden]="!f_directoryNumber.errors.required">
                                         Required field

@@ -43,13 +43,14 @@ app.put('/api/users', (req,res) => {
         }        
         user.devices.push(dev);
       })
-    }    
-
+    } 
+    
     setTimeout(() => res.send({ status: 'ok', updateduser: user}), 700);
   } else {
     setTimeout(() => res.send({status: 'fail', message: 'Update Failed'}), 700);
   }
 })
+
  
 
 app.get('/api/user', (req, res) => {
